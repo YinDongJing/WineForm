@@ -1,0 +1,450 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="fonts/iconfont.css" />
+		<style>
+			ul,li{
+				margin: 0;
+				padding: 0;
+			}
+			
+			/*头部层*/
+			.mine-goodsinfo-header{
+				height: 42px;
+				position: relative;
+				z-index: 10001;
+			}
+			.mine-goodsinfo-header-top{
+				position: fixed;
+				width: 100%;
+				background: white;
+				height: 42px;
+				line-height: 42px;
+			}
+			.mine-back{
+				float: left;
+				padding-left: 10px;
+			}
+			.mine-more{
+				float: right;
+				padding-right: 10px;
+			}
+			.mine-goods-col{
+				margin: 0 45px;
+				text-align: center;
+			}
+			.mine-goods-col span{
+				display: inline-block;
+				margin: 0 8px;
+			}
+			.retpage{
+				width: 48px;
+				height: 45px;
+			}
+			.mine-goods-col-active{
+				color: #A71D5D;
+				border-bottom: 2px solid #A71D5D;
+				padding: 0;
+			}
+			/*头部层*/
+			
+			/*底部层*/
+			.mine-shopping-btn{
+				z-index: 10001;
+				position: fixed;
+				bottom: 0;
+				height: 50px;
+				width: 100%;
+				background: white;
+			}
+			.mine-shopping-inner{
+				width: 100%;
+				height: 50px;				
+			}
+			.mine-shopping-userser{
+				float: left;
+				width: 145px;
+				font-size: 12px!important;
+			}
+			.mine-shopping-userser div{
+				display: inline-block;
+				width: 46px;
+				border-right:1px solid #B6B6B6;
+				text-align: center;
+			}
+			.mine-shopping-userbtn{
+				margin: 0 0 0 145px;
+				height: 50px;
+				font-size: 14px!important;
+			}
+			.mine-shopping-big-btn{
+				width: 50%;
+				float: right;
+				height: 50px;
+				line-height: 50px;
+				text-align: center;
+				background: #A71D5D;
+				color: white;
+			}
+			.shopping-btg-gwc{
+				background: #212c4f;
+				color: white;
+			}
+			.shopping-userser-btn{
+				margin: 0 auto;
+			}
+			.shopping-ser-icon{
+				color: #666666;
+				font-size: 20px;
+			}
+			.shopping-count{
+				position: absolute;
+				top: -5px;
+				background: #A71D5D;
+				color: white;
+				width: 18px;
+				height: 20px;
+				border-radius: 50%;
+			}
+			/*底部层*/
+			
+			
+			/*控制滑动区域高度*/
+			.mine-scroll-control{
+				padding-bottom: 50px;
+			}
+			/*控制滑动区域高度*/
+			
+			/*基本信息*/
+			.mine-wine-intro{
+		
+			}
+			/*基本信息*/
+			
+			.pet-line{
+				height: 5px;
+			}
+			.info-div{
+				background: white;
+			}
+			
+			.goods-name{
+				padding: 10px 20px ;
+			}
+			/*商品名称部分的属性*/
+			.cn{
+				font-size: 18px;
+				font-weight: 600;
+				line-height: 20px;
+				padding-bottom: 5px;
+			}
+			.en{
+				font-size: 14px;
+				font-family: "微软雅黑";
+				line-height: 16px;
+				padding-bottom: 5px;
+			}
+			.reason{
+				font-size: 14px;
+				line-height: 20px;
+				padding-bottom: 5px;
+			}
+			.reason span{
+				font-weight: bold;
+			}
+			.price span{
+				color: #AAAAAA!important;
+				font-size: 14px!important;
+			}
+			.price i{
+				color: #A71D5D!important;
+				font-size: 10px!important;
+			}
+			.price{
+				color: #A71D5D;
+				font-size: 16px;
+				font-family: arial;
+			}
+			/*商品名称部分的属性*/
+			/*数量部分属性*/
+			.goods-count{
+				width: 100%;
+				margin-top: 10px;
+				background: white;
+				border-bottom: 1px solid #DDDDDD;
+				border-top: 1px solid #DDDDDD;
+				height: 50px;
+			}
+			.goods-count-box{
+				padding: 10px 20px 10px 20px;
+				font-size: 14px;
+				line-height: 28px;
+				height: 50px;
+			}
+			.goods-count-total{
+				float: right;
+				color: #999;
+			}
+			.goods-count-total span{
+				color: #999;
+			}
+			.goods-conut-num{
+				float: left;
+				color: #999;
+			}
+			.goods-count-total i{
+				color: #A71D5D;
+			}
+			/*数量部分属性*/
+			
+			
+			/*商品规格*/
+			.goods-spec{
+				margin-top: 10px ;
+				margin-bottom: 10px;
+			}
+			.goods-spec-box{
+				padding: 10px 20px;				
+			}
+			.goods-spec-ul{
+				list-style-type: none;
+				overflow: hidden;
+			}
+			.goods-spec-ul>li{
+				float: left;
+				width: 50%;
+				line-height: 45px;
+				border-bottom: 1px solid #f5f5f5;
+				font-size: 16px;
+			}
+			.goods-spec-spli{
+				width: 100%!important;
+				float: left;
+			}
+			.goods-spec-ul li i{
+				font-size: 14px;
+				font-style: normal!important;
+				color: #999;
+				font-family: "微软雅黑";
+				padding-right: 10px;
+			}
+			/*商品规格*/
+			
+			.mui-slider img{
+				height: 400px;
+			}
+			.goods-height{
+				height: 26px!important;
+				width: 80px!important;
+				padding: 0 20px!important;
+			}
+			.goods-height button{
+				width: 20px!important;
+			}
+			.goods-plus-color{
+				color: #A71D5D!important;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<!--
+        	作者：dong2008808@vip.qq.com
+        	时间：2018-03-05
+        	描述：详情页的头部区域 
+        -->
+		<header class="mine-goodsinfo-header">
+			<div class="mine-goodsinfo-header-top">
+				<div class="mine-back">
+					<span class="retpage iconfont icon-fanhui shopping-ser-icon"></span>
+				</div>
+				<div class="mine-more">
+					<span class="iconfont icon-msnui-more shopping-ser-icon"></span>
+				</div>
+				<div class="mine-goods-col">
+					<span class="mine-goods-col-active">酒款</span>
+					<span>详情</span>
+					<span>搭配</span>			
+				</div>
+			</div>
+		</header>
+		
+		<!--
+        	作者：dong2008808@vip.qq.com
+        	时间：2018-03-06
+        	描述：底部栏
+        -->
+		<div class="mine-shopping-btn">
+			<div class="mine-shopping-inner">
+				<div class="mine-shopping-userser">
+					<div class="shopping-userser-btn">
+						<div class="iconfont icon-lianxikefu shopping-ser-icon shopping-ser-icon"></div>
+						<p>客服</p>
+					</div>
+					<div class="shopping-userser-btn">
+						<div class="iconfont icon-gouwuchekong shopping-ser-icon shopping-ser-icon"></div>
+						<em class="shopping-count">0</em>
+						<p>购物</p>
+					</div>
+					<div class="shopping-userser-btn">
+						<div class="iconfont icon-shoucang1 shopping-ser-icon shopping-ser-icon"></div>
+						<p>收藏</p>
+					</div>
+				</div>
+				<div class="mine-shopping-userbtn">
+					<a class="mine-shopping-big-btn">立即购买</a>
+					<a class="mine-shopping-big-btn shopping-btg-gwc">加入购物车</a>
+				</div>
+			</div>
+		</div>
+		
+		<!--
+        	作者：dong2008808@vip.qq.com
+        	时间：2018-03-09
+        	描述：显示滑动区域
+        -->
+		<div class="mui-content mine-scroll-control mui-hidden">
+	    	<!--
+            	作者：dong2008808@vip.qq.com
+            	时间：2018-03-06
+            	描述：轮播区域
+            -->
+	        <div id="slider" class="mui-slider" >
+	          <div class="mui-slider-group mui-slider-loop">
+	            <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+	            <div class="mui-slider-item mui-slider-item-duplicate">
+	              <a href="#">
+	                <img src="http://placehold.it/400x300">
+	              </a>
+	            </div>
+	            <!-- 第一张 -->
+	            <div class="mui-slider-item">
+	              <a href="#">
+	                <img src="images/微信截图_20180309105156.png">
+	              </a>
+	            </div>
+	            <!-- 第二张 -->
+	            <div class="mui-slider-item">
+	              <a href="#">
+	                <img src="http://placehold.it/400x300">
+	              </a>
+	            </div>
+	            <!-- 第三张 -->
+	            <div class="mui-slider-item">
+	              <a href="#">
+	                <img src="http://placehold.it/400x300">
+	              </a>
+	            </div>
+	            <!-- 第四张 -->
+	            <div class="mui-slider-item">
+	              <a href="#">
+	                <img src="http://placehold.it/400x300">
+	              </a>
+	            </div>
+	            <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+	            <div class="mui-slider-item mui-slider-item-duplicate">
+	              <a href="#">
+	                <img src="http://placehold.it/400x300">
+	              </a>
+	            </div>
+	          </div>
+	          <div class="mui-slider-indicator">
+	            <div class="mui-indicator mui-active"></div>
+	            <div class="mui-indicator"></div>
+	            <div class="mui-indicator"></div>
+	            <div class="mui-indicator"></div>
+	          </div>
+	        </div>
+	        
+	        <!--
+            	作者：dong2008808@vip.qq.com
+            	时间：2018-03-06
+            	描述：主体区域
+           -->
+            <div class="mine-wine-intro">
+            	<div class="pet-line"></div>
+            	
+            	<!--
+                	作者：dong2008808@vip.qq.com
+                	时间：2018-03-09
+                	描述：标题信息
+                -->	
+				<div class="info-div">
+            		<div class="goods-name">
+                		<div class="cn">莫斯特里干红葡萄酒</div>
+                		<div class="en">MositeliWine</div>
+                		<div class="reason"><span>推荐理由：</span>那红色的酒体，通透的颜色，那红色的酒体，通透的颜色，那红色的酒体，通透的颜色，那红色的酒体，通透的颜色，那红色的酒体，通透的颜色</div>
+                		<div class="price"><span>会员商城价：</span>¥200<i>+1000积分</i></div>
+            		</div>
+            	</div>
+            	<div class="pet-line"></div>
+            	
+            	<!--
+                	作者：dong2008808@vip.qq.com
+                	时间：2018-03-09
+                	描述：选择数量
+                -->
+				<div class="info-div">
+            		<div class="goods-count">
+            			<div class="goods-count-box">
+							<div class="goods-conut-num">已选数量							
+								<div class="mui-numbox goods-height" data-numbox-step='1' data-numbox-min='0' data-numbox-max='10'>
+								    <button class="mui-btn mui-btn-numbox-minus goods-plus-color" type="button">-</button>
+								    <input class="mui-input-numbox" type="number" />
+								    <button class="mui-btn mui-btn-numbox-plus goods-plus-color" type="button">+</button>
+								</div>
+							</div>  
+            				<div class="goods-count-total">库存
+            					<span>20</span>
+            					<i class="iconfont icon-gengduo"></i>
+            				</div> 
+            			</div>               			
+            		</div>
+            	</div>
+            	<div class="pet-line"></div>
+            	
+            	<!--
+                	作者：dong2008808@vip.qq.com
+                	时间：2018-03-09
+                	描述：规格介绍
+                -->
+            	<div class="info-div">
+            		<div class="goods-spec">
+            			<div class="goods-spec-box">
+            				<ul class="goods-spec-ul">
+            					<li><i>类型</i>干红葡萄酒</li>
+            					<li><i>容量</i>750ml</li>
+            					<li><i>等级</i>法定产区</li>
+            					<li><i>酒庄</i>浪琴慕沙城堡</li>
+            					<li class="goods-spec-spli"><i>产区</i>法国-波尔图</li>
+            					<li class="goods-spec-spli"><i>葡萄品种</i>赤霞珠 美乐</li>
+            				</ul>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+        </div>
+		
+		<div class="mui-content mine-scroll-control">
+			
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			
+			var goodscol=$('.mine-goods-col');
+			goodscol.children().click(function(){
+				$(this).addClass('mine-goods-col-active');
+				$(this).siblings().removeClass('mine-goods-col-active');
+			})
+		</script>
+	</body>
+
+</html>

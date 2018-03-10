@@ -1,0 +1,837 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="fonts/iconfont.css" rel="stylesheet" />
+		<style>		
+			
+			a:link{
+				color: #A0A0A0;
+				text-decoration: blink;
+			}		
+			
+			a:visited{
+				
+			}
+			
+			a:hover{
+				color: #A0A0A0;
+				text-decoration: blink;
+			}
+			
+			/*控制ul*/	
+			.mui-droplist{
+				list-style-type: none!important;
+				margin: 0;
+				padding: 0 4px 0 4px;
+				background-color: white;
+			}
+			
+			/*控制层内的照片*/
+			.mui-media-img{
+				width: 90%;
+				border-radius: 4px;
+				padding: 10px 0 0 14px;
+			}
+			
+			.mui-mine-goods-li{
+				background-color: #FAFAFA;
+				box-shadow: 0px 0px 2px #C0C0C0;
+				display: inline-block;
+			}
+			
+			.mui-mine-search-header{
+				height: 42px;	
+				width: 100%;	
+				position: fixed;
+				bottom:1;
+				z-index: 1000;
+				background:#A71D5D;
+				opacity: 0;
+			}
+			
+			
+			/*搜索框*/		    
+			.mui-mine-search-header-input{
+				background: url(images/3.0-搜索.png) no-repeat scroll left center transparent;	
+				background-size: 20px 20px;			
+				background-position-x: 5px;
+				width: 85%;
+				border:2px solid #A71D5D ;
+				height: 30px;
+			 	font-size: 14px;
+			 	/*position: absolute;
+			 	left: 15px;
+			 	top: 5px;*/
+			 	margin: 6px 0 0 15px;
+			 	background-color: white;
+			 	border-radius: 8px;
+			 	padding-left: 30px;
+			 	caret-color: #0062CC;
+			}
+			
+			/*搜索框聚焦*/
+			.mui-mine-search-header-input:focus{
+				border: 1px solid #0062CC;
+			}
+			
+			/*搜索框内扫一扫*/
+			.mui-mine-search-header-scan{
+				font-size: 26px;
+				float: right;
+				margin: 10px 10px 0 0;
+			}
+			
+			.mui-mine-slider-img{
+				height: 200px;
+			}
+			
+			.mui-mine-chooselist{
+				background: white;
+				box-shadow: 0px 10px 20px #222426;
+				width: 90px;
+				font-size: 14px;
+				padding-left: 5px;
+				float: left;
+			}
+			
+			ul,li{
+				padding: 0;
+				margin: 0;
+				list-style: none;
+			}
+			
+			/*四等分横向选择列*/
+			.mui-mine-chooselist-second{
+				float: left;
+				width: 24%;
+				text-align: center;
+				background: white;
+				line-height: 140%;
+				padding-top: 5px;
+				padding-bottom: 5px;
+				border-left: solid 1px gray;
+				font-size: 16px;
+				box-shadow: -1px -1px 2px #A71D5D;
+			}
+			
+			/*列的外层包裹*/
+			.chooselist{
+				width: 100%;
+				background: white;
+			}
+			
+			.chooselist-items{
+				width: 100%;
+				background: white;
+				position: fixed;
+				z-index: 1;
+			}
+			
+			/*商品标签导航 左*/
+			.goods-tab-left{
+				border-left: solid 5px #A71D5D;
+				width: 80%;
+				float: left;
+				padding-left: 5px;
+				padding-top: 10px;
+				height: 40px;
+				font-size: 18px;
+				font-weight: bold;
+			}
+			
+			/*商品标签导航 右*/
+			.goods-tab-right{
+				padding-right: 20px;
+				padding-top: 10px;
+				color: #555555;
+				font-size: 14px;
+				float: right;
+			}
+			
+			/*控制中文名*/
+			.good-list-chinesename{
+				display: block;
+				font: "微软雅黑";
+				font-size: 12px;
+				padding-left: 14px;
+				padding-right: 10px;
+				text-align: match-parent;
+			}
+			
+			.good-list-chinesename:link{
+				color: #A0A0A0;
+				text-decoration: blink;
+			}
+			
+			.good-list-chinesename:visited{
+				color: #0062CC;
+			}
+			
+			/*商品列表 左下*/
+			.goods-list-left{
+				display: block;
+				float: left;
+				padding-left: 14px;
+				margin-bottom: 5px;
+			}
+			
+			.goods-list-left-shouliang{
+				font-size: 12px;
+			}
+			
+			.goods-list-left>span{
+				font-size: 12px;
+				color: #A71D5D;
+			}
+			
+			.goods-list-left-jiage{
+				font-size: 12px;
+				color: #F00B0D;
+			}
+			
+			/*商品列表右下*/
+			.goods-list-right{
+				padding-right: 15px;
+				padding-top: 10px;
+				float: right;
+				margin-bottom: 5px;
+			}
+			
+			.line{
+				color: #A0A0A0;
+				width: 100%;
+				height: 5px;
+			}
+			
+			.gouwuche{
+				margin-right: 15px!important;
+		    	color:#A71D5D;
+		    	font-size: 24px!important;
+			}
+			
+			/*设置中间滑动层的显示高度*/
+			.mui-content{
+				padding-bottom: 55px;
+			}
+			
+			/*底部系列*//*底部系列*//*底部系列*//*底部系列*//*底部系列*/
+			/*底部导航总样式*/
+			.mine-bar-tab{
+				border-radius: 10px;
+				border-top: solid 1px #999999;
+				border-bottom: solid 1px #999999;
+				border-top-left-radius: 8px ;
+				border-top-right-radius: 8px;
+				display: table;
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				height: 42px;
+				background-color: #A71D5D;
+			}
+			
+			/*底部栏内容设置*/
+			.mine-tab-item{
+				display: table-cell;
+				text-align: center;
+				color: white;
+			}
+			
+			/*底部图标*/
+			.mine-tab-iconfont{
+				font-size: 20px;
+				
+			}
+						
+			/*底部字体*/
+			.mine-tab-label{
+				padding: 0 0 2px 0;
+				display: block;
+				font-size: 11px;
+			}
+			/*底部系列*//*底部系列*//*底部系列*//*底部系列*//*底部系列*/
+			
+			.goods-list-loading{
+				height: 30px;
+				width: 30px;
+				border-radius: 50px;
+				background: url(images/5-121204193943.gif) no-repeat center;
+				margin: auto;
+				animation: load 1s linear infinite;
+	            -moz-animation:load 1s linear infinite;
+           		-webkit-animation: load 1s linear infinite;
+            	-o-animation:load 1s linear infinite;
+			}
+			
+			@-webkit-keyframes load
+       		 {
+      		 	 from{-webkit-transform:rotate(0deg);}
+       			 to{-webkit-transform:rotate(360deg);}
+       		 }
+		    @-moz-keyframes load
+		    {
+		        from{-moz-transform:rotate(0deg);}
+		        to{-moz-transform:rotate(360deg);}
+		    }
+		    @-o-keyframes load
+		    {
+		        from{-o-transform:rotate(0deg);}
+		        to{-o-transform:rotate(360deg);}
+		    }
+		    
+		    .test{
+		    	display: block;
+		    }
+		    
+		    .goods-list-nav-more{
+		    	text-align: center;
+		    	padding: 6px;
+		    	background: white;
+		    	color: #6E727B;
+		        font: "微软雅黑";
+		        font-size: 14px;
+		        height: 30px;
+		        display: inline-block;
+		        width: 100%;
+		    }		
+		    
+		    
+		    /*侧板*/
+		    .mine-cebian-tab{
+		    	margin: 0;
+		    	padding: 0;
+		    	position:fixed;
+		    	top: 450px;
+		    	right:0;
+		    	border-radius: 5px;
+	    	    border-right-color: white;
+		    }
+		    
+		    .mine-cebian-tab>div{
+		    	font-size: 20px;
+		    }
+		    
+		    .mine-cebian-tab-shou{
+		    	display: table-caption;
+			    font-size: 16px;
+			    color: white!important;
+		    }
+		    
+		    .mine-cebian-tab-fang{
+			    background: #A71D5D;
+			    color: darkgray;	
+			    border-top-left-radius: 5px;
+			    border-bottom-left-radius: 5px;
+		    }
+		    
+		    .mine-cebian-tab-fang>div{
+		    	padding: 10px 5px;
+		    }
+		    
+		    .mine-cebian-show{
+		    	width: 3%;
+		    }
+		    
+		    .goods-list-bottom{
+		    	text-align: center;
+		    	color: darkgray;
+		    	font-size: 14px;
+		    }
+		</style>
+	</head>
+
+	<body id="top">
+		<!--
+        	作者：dong2008808@vip.qq.com
+        	时间：2018-02-11
+        	描述：顶部搜索栏
+        -->
+		<div class="mui-mine-search-header">
+				<input class="mui-mine-search-header-input" placeholder=" 请输入您想查找的酒名..." />
+				<span class="iconfont icon-saoyisao mui-mine-search-header-scan"></span>
+		</div>
+		
+		<!--
+        	作者：dong2008808@vip.qq.com
+        	时间：2018-02-11
+        	描述：轮播图
+        -->		
+        <div id="slider" class="mui-slider" >
+		  <div class="mui-slider-group mui-slider-loop">
+		    <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+		    <div class="mui-slider-item mui-slider-item-duplicate">
+		      <a href="#">
+		        <img class="mui-mine-slider-img" src="https://img1.360buyimg.com/da/jfs/t19675/35/527297390/89254/3fd0fdb2/5a93feffN6dc3c0c9.jpg">  
+		      </a>
+		    </div>
+		    <!-- 第一张 -->
+		    <div class="mui-slider-item">
+		      <a href="#">
+		     	<img class="mui-mine-slider-img" src="https://img1.360buyimg.com/da/jfs/t19675/35/527297390/89254/3fd0fdb2/5a93feffN6dc3c0c9.jpg"> 
+		      </a>
+		    </div>
+		    <!-- 第二张 -->
+		    <div class="mui-slider-item">
+		      <a href="#">
+		     	<img class="mui-mine-slider-img" src="images/hanning.png"> 
+		      </a>
+		    </div>
+		    <!-- 第三张 -->
+		    <div class="mui-slider-item">
+		      <a href="#">
+		        <img class="mui-mine-slider-img" src="images/hanning.png">  
+		      </a>
+		    </div>
+		    <!-- 第四张 -->
+		    <div class="mui-slider-item">
+		      <a href="#">
+		       <img class="mui-mine-slider-img" src="images/hanning.png"> 
+		      </a>
+		    </div>
+		    <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+		    <div class="mui-slider-item mui-slider-item-duplicate">
+		      <a href="#">
+		        <img class="mui-mine-slider-img" src="images/hanning.png"> 
+		      </a>
+		    </div>
+		  </div>
+		  <div class="mui-slider-indicator">
+		    <div class="mui-indicator mui-active"></div>
+		    <div class="mui-indicator"></div>
+		    <div class="mui-indicator"></div>
+		    <div class="mui-indicator"></div>
+		  </div>
+		</div>
+		
+		<!--<div class="chooselist">
+				<ul>
+					<li class="jiage mui-mine-chooselist-second">价格</li>
+					<li class="xiaoliang mui-mine-chooselist-second">销量</li>
+					<li class="chandi mui-mine-chooselist-second">产地</li>
+					<li class="dapei mui-mine-chooselist-second">搭配</li>
+				</ul>
+			</div>
+			<div id="show" class="chooselist-items mui-hidden">
+				<ul>
+					<li>
+						hhh
+					</li>
+				</ul>
+			</div>-->
+		
+		<!--
+    	作者：dong2008808@vip.qq.com
+    	时间：2018-02-26
+    	描述：商品列表层
+        -->
+		<div class="mui-content">
+			<div class="goods-tab-left">法国</div>
+			<div class="goods-tab-right">更多<span class="iconfont icon-gengduo1"></span></div>	
+			<div class="line"></div>	
+			<div>
+				<ul class="mui-row mui-droplist">
+	    		<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li">
+	    			<img class="mui-media-img" src="images/莫奈庄园产品图片 (1).jpg"/>
+	    			<a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a>
+	    			<div class="goods-list-left">
+	    				<div class="goods-list-left-shouliang">已售:<span>3000</span></div>
+	    				<div class="goods-list-left-jiage">
+	    					<span class="iconfont icon-jiage"><label>35.00</label></span>
+	    				</div>
+	    			</div>
+	    			<div class="goods-list-right">
+	    				<span class="iconfont icon-gouwuchekong gouwuche"></span>
+	    			</div>
+	    		</li>
+	    		<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li">
+	    			<img class="mui-media-img"  src="images/莫奈庄园产品图片 (1).jpg"/>
+	    			<a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a>
+	    			<div class="goods-list-left">
+	    				<div class="goods-list-left-shouliang">已售:<span>3000</span></div>
+	    				<div class="goods-list-left-jiage">
+	    					<span class="iconfont icon-jiage"><label>35.00</label></span>
+	    				</div>
+	    			</div>
+	    			<div class="goods-list-right">
+	    				<span class="iconfont icon-gouwuchekong gouwuche"></span>
+	    			</div>
+	    		</li>
+	    		<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li">
+	    			<img class="mui-media-img"  src="images/莫奈庄园产品图片 (1).jpg"/>
+	    			<a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a>
+	    			<div class="goods-list-left">
+	    				<div class="goods-list-left-shouliang">已售:<span>3000</span></div>
+	    				<div class="goods-list-left-jiage">
+	    					<span class="iconfont icon-jiage"><label>35.00</label></span>
+	    				</div>
+	    			</div>
+	    			<div class="goods-list-right">
+	    				<span class="iconfont icon-gouwuchekong gouwuche"></span>
+	    			</div>
+	    		</li>
+	    		<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li">
+	    			<img class="mui-media-img"  src="images/莫奈庄园产品图片 (1).jpg"/>
+	    			<a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a>
+	    			<div class="goods-list-left">
+	    				<div class="goods-list-left-shouliang">已售:<span>3000</span></div>
+	    				<div class="goods-list-left-jiage">
+	    					<span class="iconfont icon-jiage"><label>35.00</label></span>
+	    				</div>
+	    			</div>
+	    			<div class="goods-list-right">
+	    				<span class="iconfont icon-gouwuchekong gouwuche"></span>
+	    			</div>
+	    		</li>
+	    		<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li">
+	    			<img class="mui-media-img"  src="images/莫奈庄园产品图片 (1).jpg"/>
+	    			<a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a>
+	    			<div class="goods-list-left">
+	    				<div class="goods-list-left-shouliang">已售:<span>3000</span></div>
+	    				<div class="goods-list-left-jiage">
+	    					<span class="iconfont icon-jiage"><label>35.00</label></span>
+	    				</div>
+	    			</div>
+	    			<div class="goods-list-right">
+	    				<span class="iconfont icon-gouwuchekong gouwuche"></span>
+	    			</div>
+	    		</li>
+	    		<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li">
+	    			<img class="mui-media-img"  src="images/莫奈庄园产品图片 (1).jpg"/>
+	    			<a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a>
+	    			<div class="goods-list-left">
+	    				<div class="goods-list-left-shouliang">已售:<span>3000</span></div>
+	    				<div class="goods-list-left-jiage">
+	    					<span class="iconfont icon-jiage"><label>35.00</label></span>
+	    				</div>
+	    			</div>
+	    			<div class="goods-list-right">
+	    				<span class="iconfont icon-gouwuchekong gouwuche"></span>
+	    			</div>
+	    		</li>	    		    		
+	  		</ul>
+				<div class="goods-list-nav-more">点击查看更多</div>
+				<div class="shou">收拢</div>
+				<div class="line"></div>	
+			</div>	   
+			
+			
+			<div class="goods-tab-left">法国</div>
+			<div class="goods-tab-right">更多<span class="iconfont icon-gengduo1"></span></div>		
+			<div class="line"></div>	
+			<div>
+				<ul id="faguo" class="mui-row mui-droplist">
+	    		<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li">
+	    			<img class="mui-media-img" src="images/莫奈庄园产品图片.png"/>
+	    			<a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a>
+	    			<div class="goods-list-left">
+	    				<div class="goods-list-left-shouliang">已售:<span>3000</span></div>
+	    				<div class="goods-list-left-jiage">
+	    					<span class="iconfont icon-jiage"><label>35.00</label></span>
+	    				</div>
+	    			</div>
+	    			<div class="goods-list-right">
+	    				<span class="iconfont icon-gouwuchekong gouwuche"></span>
+	    			</div>
+	    		</li>
+	    		<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li">
+	    			<img class="mui-media-img" src="images/莫奈庄园产品图片.png"/>
+	    			<a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a>
+	    			<div class="goods-list-left">
+	    				<div class="goods-list-left-shouliang">已售:<span>3000</span></div>
+	    				<div class="goods-list-left-jiage">
+	    					<span class="iconfont icon-jiage"><label>35.00</label></span>
+	    				</div>
+	    			</div>
+	    			<div class="goods-list-right">
+	    				<span class="iconfont icon-gouwuchekong gouwuche"></span>
+	    			</div>
+	    		</li>
+	    		<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li">
+	    			<img class="mui-media-img" src="images/莫奈庄园产品图片.png"/>
+	    			<a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a>
+	    			<div class="goods-list-left">
+	    				<div class="goods-list-left-shouliang">已售:<span>3000</span></div>
+	    				<div class="goods-list-left-jiage">
+	    					<span class="iconfont icon-jiage"><label>35.00</label></span>
+	    				</div>
+	    			</div>
+	    			<div class="goods-list-right">
+	    				<span class="iconfont icon-gouwuchekong gouwuche"></span>
+	    			</div>
+	    		</li>
+	    		<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li">
+	    			<img class="mui-media-img" src="images/莫奈庄园产品图片.png"/>
+	    			<a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a>
+	    			<div class="goods-list-left">
+	    				<div class="goods-list-left-shouliang">已售:<span>3000</span></div>
+	    				<div class="goods-list-left-jiage">
+	    					<span class="iconfont icon-jiage"><label>35.00</label></span>
+	    				</div>
+	    			</div>
+	    			<div class="goods-list-right">
+	    				<span class="iconfont icon-gouwuchekong gouwuche"></span>
+	    			</div>
+	    		</li>
+	    		<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li">
+	    			<img class="mui-media-img" src="images/莫奈庄园产品图片.png"/>
+	    			<a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a>
+	    			<div class="goods-list-left">
+	    				<div class="goods-list-left-shouliang">已售:<span>3000</span></div>
+	    				<div class="goods-list-left-jiage">
+	    					<span class="iconfont icon-jiage"><label>35.00</label></span>
+	    				</div>
+	    			</div>
+	    			<div class="goods-list-right">
+	    				<span class="iconfont icon-gouwuchekong gouwuche"></span>
+	    			</div>
+	    		</li>
+	    		<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li">
+	    			<img class="mui-media-img" src="images/莫奈庄园产品图片.png"/>
+	    			<a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a>
+	    			<div class="goods-list-left">
+	    				<div class="goods-list-left-shouliang">已售:<span>3000</span></div>
+	    				<div class="goods-list-left-jiage">
+	    					<span class="iconfont icon-jiage"><label>35.00</label></span>
+	    				</div>
+	    			</div>
+	    			<div class="goods-list-right">
+	    				<span class="iconfont icon-gouwuchekong gouwuche"></span>
+	    			</div>
+	    		</li>
+	    	</ul>
+				<div class="line"></div>
+				<div id="jiazai">
+					<div class="goods-list-bottom">上拉加载更多</div>
+					<div class="goods-list-loading"></div>
+				</div>
+			</div>	
+		</div>
+		
+		<!--
+        	作者：dong2008808@vip.qq.com
+        	时间：2018-02-27
+        	描述：底部导航层
+        -->
+		<nav class="mine-bar-tab">
+			<a class="mine-tab-item">
+				<span class="mine-tab-iconfont iconfont icon-jiage"></span>
+				<span class="mine-tab-label">我 的</span>
+			</a>
+			<a class="mine-tab-item">
+				<span class="mine-tab-iconfont iconfont icon-jiage"></span>
+				<span class="mine-tab-label" onclick="kk()">我 的</span>
+			</a>
+			<a class="mine-tab-item">
+				<span class="mine-tab-iconfont iconfont icon-jiage"></span>
+				<span class="mine-tab-label">我 的</span>
+			</a>
+			<a class="mine-tab-item">
+				<span class="mine-tab-iconfont iconfont icon-jiage"></span>
+				<span class="mine-tab-label">我 的</span>
+			</a>
+		</nav>
+
+		<div class="mine-cebian-tab">
+			<div id="clickafter"  class="mine-cebian-tab-fang">
+					<div id="backtop" class="iconfont icon-icon mui-hidden"></div>
+					<div id="conkefu" class="iconfont icon-lianxikefu1 mui-hidden"></div>						
+				<span class="mui-icon mui-icon-arrowleft mine-cebian-tab-shou"></span>
+			</div>
+		</div>
+
+
+		<script src="js/mui.min.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			
+			function kk(){
+				go=true;
+			}
+			
+			//2018.03.02 控制返回顶层逻辑
+			$('#backtop').click(function(){
+				location.href="#top";
+			})
+			
+			//2018.03.02 控制接入客服逻辑
+			$('#conkefu').click(function(){
+				alert('正在接入客服…… 请稍后');
+			})
+			
+			//2018.03.02 控制侧栏的显示与收缩的效果
+			$('.mine-cebian-tab').click(function(){
+				if($(this).children('div').find('div').hasClass('mui-hidden')){
+					$(this).find('span').addClass('mui-hidden');
+					$(this).children('div').find('div').removeClass('mui-hidden');
+				}else{
+					$(this).children('div').find('div').addClass('mui-hidden');
+					$(this).children('div').find('span').removeClass('mui-hidden');
+				}
+			})
+			
+			//获得slider插件对象
+//			var gallery = mui('.mui-slider');
+//			gallery.slider({
+// 				interval:2000//自动轮播周期，若为0则不自动播放，默认为0；
+//			});
+			
+			$('.goods-list-nav-more').click(function(){
+				//$(this).css('display','none');
+				$('#kk').fadeToggle("show");
+//				$('.mui-droplist').each(function(){
+////					$(this).find('li').css('display','none').siblings('li').css('display','inline-block');
+////					//$(this).find('li').css('display','none').removeAttr('style');
+////					console.log($(this).find('li').css('display','none'));
+//
+//				})
+
+				//$('#onefaguo').fadeToggle("show");
+				//$('.goods-list-nav-more').toggle();
+				//$('.shou').toggle();
+//				$('#onefaguo').append('<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li"><img class="mui-media-img" src="images/莫奈庄园产品图片.png"/><a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a><div class="goods-list-left"><div class="goods-list-left-shouliang">已售:<span>3000</span></div>	    				<div class="goods-list-left-jiage">	    					<span class="iconfont icon-jiage"><label>35.00</label></span>	    				</div>	    			</div><div class="goods-list-right">span class="iconfont icon-gouwuchekong gouwuche"></span></div></li>')
+			})
+			
+			var Goodsloadmore=function(domname,domdata){
+				var dom=$('#'+domname+'');
+				var domdata=domdata;
+			}
+			
+//			document.onreadystatechange=ert;
+//			function ert(){
+//							if(document.readyState=="loading"){
+//				alert("请等待");
+//			}
+//			if(document.readyState=="complete"){
+//				alert("OK");
+//			}
+//			}
+
+
+			$('.jiage').click(function(){
+				$('#show').removeClass('mui-hidden');
+			})
+			
+			$(window).scrollTop()+$(window).height()>=$(document).height()
+			
+			
+			var go=true;
+			var tmp=0;
+			var count=3;
+			
+			var startY=0;
+			var endY=0;
+			
+			document.addEventListener('touchstart',function(e){
+				startY=e.touches[0].pageY;
+			})
+			
+//			document.addEventListener('touchend',function(e){
+//				console.log(endY);console.log(startY);
+//				endY=e.changedTouches[0].pageY;
+//				var dir=endY-startY;
+//				if(endY<startY){
+//					alert('下');
+//				}else if(endY>startY){
+//					alert('上');
+//				}else{
+//					alert('无');
+//				}
+//			})
+			
+			
+			$(window).scroll(function(){				
+				
+				
+				//滑动高度
+				var a=$(window).scrollTop();
+				$('.mui-mine-search-header').css({
+						opacity:(((a / 150) > 0.95) ? 0.95 : (a / 150)) 
+				})
+							
+				//窗口高度
+				var b=$(window).height();
+				//文档总高
+				var c=$(document).height();
+//				console.log(a);console.log(b);console.log(c);
+				
+				
+				if(c-b-a<5){
+					var textdom=$('.goods-list-bottom');
+					if(go==false)
+					return;
+					
+//					setTimeout(function(){					
+//						if(textdom.innerHTML=="上拉加载更多"){
+//							textdom.siblings('div').addClass('mui-hidden');
+//						}				
+//						console.log('1');
+//					},1000);
+					
+					setTimeout(function(){
+						if(count>0){							
+							$('#faguo').append('<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li"><img class="mui-media-img" src="images/莫奈庄园产品图片.png"/><a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a><div class="goods-list-left"><div class="goods-list-left-shouliang">已售:<span>3000</span></div>	    				<div class="goods-list-left-jiage">	    					<span class="iconfont icon-jiage"><label>35.00</label></span>	    				</div>	    			</div><div class="goods-list-right">span class="iconfont icon-gouwuchekong gouwuche"></span></div></li>');
+							console.log('2');
+							count--;
+						}else{
+							go=false;
+							textdom.html('暂无更多数据');
+							textdom.siblings().addClass('mui-hidden');
+						}
+					},2000);				
+						
+						
+						
+					
+					
+//					if(isok==false){											
+//						if(hasdata==true){
+//							setTimeout(function(){
+//								$('.goods-list-loading').css('display','none');
+//								$('#faguo').append('<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li"><img class="mui-media-img" src="images/莫奈庄园产品图片.png"/><a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a><div class="goods-list-left"><div class="goods-list-left-shouliang">已售:<span>3000</span></div>	    				<div class="goods-list-left-jiage">	    					<span class="iconfont icon-jiage"><label>35.00</label></span>	    				</div>	    			</div><div class="goods-list-right">span class="iconfont icon-gouwuchekong gouwuche"></span></div></li>')
+//							},3000);						
+//						}
+//							
+//					}				
+//					if(hasdata==true){
+//						setTimeout(function(){
+//							$('#faguo').append('<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li"><img class="mui-media-img" src="images/莫奈庄园产品图片.png"/><a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a><div class="goods-list-left"><div class="goods-list-left-shouliang">已售:<span>3000</span></div>	    				<div class="goods-list-left-jiage">	    					<span class="iconfont icon-jiage"><label>35.00</label></span>	    				</div>	    			</div><div class="goods-list-right">span class="iconfont icon-gouwuchekong gouwuche"></span></div></li>')
+//						},2000);						
+//					}
+//					if(hasdata==false&&isok==false){
+//						setTimeout(function(){
+//						$('#jiazai').empty();
+//						
+//						isok=true;
+//						},2000);
+//					}
+					
+//					if(tmp==2){
+//						$('#faguo').append('<div class="test">没有更多数据了</div>');
+//						isok=true;
+//					}else{
+//						tmp++;
+//						if(isok==false){
+//							setTimeout(function(){
+//								$('#faguo').append('<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li"><img class="mui-media-img" src="images/莫奈庄园产品图片.png"/><a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a><div class="goods-list-left"><div class="goods-list-left-shouliang">已售:<span>3000</span></div>	    				<div class="goods-list-left-jiage">	    					<span class="iconfont icon-jiage"><label>35.00</label></span>	    				</div>	    			</div><div class="goods-list-right">span class="iconfont icon-gouwuchekong gouwuche"></span></div></li>')
+//							},2000);							
+//						}
+//
+//					}
+//					setTimeout(function(){
+//							$('#faguo').append('<li class="mui-col-sm-6 mui-col-xs-6 mui-mine-goods-li"><img class="mui-media-img" src="images/莫奈庄园产品图片.png"/><a href="javascript:;" class="good-list-chinesename">莫奈庄园精选干红葡萄酒</a><div class="goods-list-left"><div class="goods-list-left-shouliang">已售:<span>3000</span></div>	    				<div class="goods-list-left-jiage">	    					<span class="iconfont icon-jiage"><label>35.00</label></span>	    				</div>	    			</div><div class="goods-list-right">span class="iconfont icon-gouwuchekong gouwuche"></span></div></li>')
+//					},2000);
+				
+				}
+
+			})
+
+		</script>
+	</body>
+
+</html>
